@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forma Studio — Design & Development</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --ink: #1b1b1b;
+            --paper: #f6f4f0;
+            --stone: #9c9890;
+            --clay: #d4cfc7;
+            --terracotta: #c67a4b;
+            --sage: #7a8c6e;
+            --deep: #2c2c3a;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--paper);
+            color: var(--ink);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* NAV */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 24px 48px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            mix-blend-mode: difference;
+        }
+
+        .logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 20px;
+            letter-spacing: -0.5px;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.6;
+        }
+
+        /* HERO */
+        .hero {
+            min-height: 100vh;
+            background: var(--deep);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 48px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -20%;
+            right: -10%;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(198,122,75,0.15) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-tagline {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--stone);
+            margin-bottom: 24px;
+        }
+
+        .hero h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(48px, 8vw, 112px);
+            font-weight: 300;
+            line-height: 1.05;
+            color: var(--paper);
+            max-width: 900px;
+            letter-spacing: -2px;
+        }
+
+        .hero h1 em {
+            font-style: italic;
+            font-weight: 500;
+            color: var(--terracotta);
+        }
+
+        .hero-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-top: 64px;
+            padding-bottom: 24px;
+        }
+
+        .hero-scroll {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--stone);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .scroll-line {
+            width: 48px;
+            height: 1px;
+            background: var(--stone);
+        }
+
+        .hero-year {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 14px;
+            color: var(--stone);
+        }
+
+        /* ABOUT */
+        .about {
+            padding: 120px 48px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: start;
+        }
+
+        .about-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--stone);
+            margin-bottom: 32px;
+        }
+
+        .about-text {
+            font-size: 28px;
+            font-weight: 300;
+            line-height: 1.5;
+            letter-spacing: -0.3px;
+            color: var(--ink);
+        }
+
+        .about-text strong {
+            font-weight: 500;
+        }
+
+        .about-right {
+            padding-top: 80px;
+        }
+
+        .about-description {
+            font-size: 16px;
+            line-height: 1.8;
+            color: var(--stone);
+            max-width: 440px;
+        }
+
+        .about-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 56px;
+        }
+
+        .stat-number {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 42px;
+            font-weight: 600;
+            color: var(--ink);
+            letter-spacing: -1px;
+        }
+
+        .stat-label {
+            font-size: 13px;
+            color: var(--stone);
+            margin-top: 4px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* SERVICES */
+        .services {
+            padding: 80px 48px 120px;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 64px;
+            border-bottom: 1px solid var(--clay);
+            padding-bottom: 24px;
+        }
+
+        .section-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2px;
+        }
+
+        .service-card {
+            background: var(--ink);
+            color: var(--paper);
+            padding: 48px 36px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 380px;
+            position: relative;
+            overflow: hidden;
+            transition: background 0.4s ease;
+        }
+
+        .service-card:hover {
+            background: var(--deep);
+        }
+
+        .service-card:nth-child(2) {
+            background: var(--terracotta);
+        }
+
+        .service-card:nth-child(2):hover {
+            background: #b56a3d;
+        }
+
+        .service-icon {
+            width: 48px;
+            height: 48px;
+            border: 1px solid currentColor;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 18px;
+            opacity: 0.7;
+        }
+
+        .service-card h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 28px;
+            font-weight: 400;
+            letter-spacing: -0.5px;
+            margin-top: auto;
+        }
+
+        .service-desc {
+            font-size: 14px;
+            line-height: 1.7;
+            opacity: 0.7;
+            margin-top: 16px;
+        }
+
+        /* WORK */
+        .work {
+            padding: 80px 48px 120px;
+        }
+
+        .work-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 24px;
+            margin-top: 0;
+        }
+
+        .work-item {
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .work-image {
+            width: 100%;
+            aspect-ratio: 4/3;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.6s ease;
+        }
+
+        .work-item:hover .work-image {
+            transform: scale(1.03);
+        }
+
+        .work-placeholder {
+            width: 100%;
+            aspect-ratio: 4/3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 18px;
+            color: var(--stone);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .wp-1 {
+            background: linear-gradient(135deg, #2c2c3a 0%, #3d3d52 50%, #2c2c3a 100%);
+            position: relative;
+        }
+
+        .wp-1::after {
+            content: '';
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border: 1px solid rgba(198,122,75,0.3);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .wp-1::before {
+            content: '';
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            background: rgba(198,122,75,0.15);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .wp-2 {
+            background: linear-gradient(180deg, var(--sage) 0%, #5f7053 100%);
+            position: relative;
+        }
+
+        .wp-2::after {
+            content: '';
+            position: absolute;
+            width: 160px;
+            height: 160px;
+            border: 1px solid rgba(255,255,255,0.2);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(45deg);
+        }
+
+        .wp-3 {
+            background: linear-gradient(135deg, var(--terracotta) 0%, #a85f35 100%);
+            position: relative;
+        }
+
+        .wp-3::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 20px,
+                rgba(255,255,255,0.03) 20px,
+                rgba(255,255,255,0.03) 40px
+            );
+        }
+
+        .wp-4 {
+            background: linear-gradient(180deg, #1b1b1b 0%, #2c2c3a 100%);
+            position: relative;
+        }
+
+        .wp-4::after {
+            content: '';
+            position: absolute;
+            width: 80%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--stone), transparent);
+            top: 50%;
+            left: 10%;
+        }
+
+        .wp-4::before {
+            content: '';
+            position: absolute;
+            width: 1px;
+            height: 80%;
+            background: linear-gradient(180deg, transparent, var(--stone), transparent);
+            left: 50%;
+            top: 10%;
+        }
+
+        .work-row-2 {
+            display: grid;
+            grid-template-columns: 0.8fr 1.2fr;
+            gap: 24px;
+            margin-top: 24px;
+        }
+
+        .work-info {
+            padding: 24px 0 0;
+        }
+
+        .work-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 18px;
+            font-weight: 500;
+            letter-spacing: -0.3px;
+        }
+
+        .work-category {
+            font-size: 13px;
+            color: var(--stone);
+            margin-top: 4px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* CONTACT */
+        .contact {
+            background: var(--ink);
+            color: var(--paper);
+            padding: 120px 48px;
+            text-align: center;
+        }
+
+        .contact-heading {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(36px, 5vw, 72px);
+            font-weight: 300;
+            letter-spacing: -1px;
+            line-height: 1.2;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .contact-heading em {
+            font-style: italic;
+            color: var(--terracotta);
+        }
+
+        .contact-cta {
+            display: inline-block;
+            margin-top: 48px;
+            padding: 18px 48px;
+            border: 1px solid var(--paper);
+            color: var(--paper);
+            text-decoration: none;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .contact-cta:hover {
+            background: var(--paper);
+            color: var(--ink);
+        }
+
+        .contact-email {
+            margin-top: 64px;
+            font-size: 14px;
+            color: var(--stone);
+        }
+
+        .contact-email a {
+            color: var(--clay);
+            text-decoration: none;
+            border-bottom: 1px solid var(--stone);
+            padding-bottom: 2px;
+            transition: color 0.3s;
+        }
+
+        .contact-email a:hover {
+            color: var(--terracotta);
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--ink);
+            border-top: 1px solid rgba(255,255,255,0.08);
+            padding: 32px 48px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--stone);
+            font-size: 13px;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 24px;
+        }
+
+        .footer-social a {
+            color: var(--stone);
+            text-decoration: none;
+            font-size: 13px;
+            transition: color 0.3s;
+        }
+
+        .footer-social a:hover {
+            color: var(--paper);
+        }
+
+        /* MOBILE */
+        @media (max-width: 768px) {
+            nav {
+                padding: 20px 24px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero {
+                padding: 24px;
+                padding-bottom: 48px;
+            }
+
+            .hero h1 {
+                font-size: 42px;
+                letter-spacing: -1px;
+            }
+
+            .hero-bottom {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 24px;
+            }
+
+            .about {
+                padding: 80px 24px;
+                grid-template-columns: 1fr;
+                gap: 48px;
+            }
+
+            .about-text {
+                font-size: 22px;
+            }
+
+            .about-right {
+                padding-top: 0;
+            }
+
+            .services {
+                padding: 60px 24px 80px;
+            }
+
+            .service-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .service-card {
+                min-height: 280px;
+            }
+
+            .work {
+                padding: 60px 24px 80px;
+            }
+
+            .work-grid,
+            .work-row-2 {
+                grid-template-columns: 1fr;
+            }
+
+            .contact {
+                padding: 80px 24px;
+            }
+
+            footer {
+                padding: 24px;
+                flex-direction: column;
+                gap: 16px;
+                text-align: center;
+            }
+        }
+
+        /* REVEAL ANIMATION */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="#" class="logo">Forma</a>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#work">Work</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+        <p class="hero-tagline">Design & Development Studio</p>
+        <h1>We shape <em>digital<br>experiences</em> that matter</h1>
+        <div class="hero-bottom">
+            <div class="hero-scroll">
+                <span class="scroll-line"></span>
+                Scroll to explore
+            </div>
+            <div class="hero-year">Est. 2019 — Stockholm</div>
+        </div>
+    </section>
+
+    <section class="about" id="about">
+        <div class="about-left reveal">
+            <p class="about-label">Who we are</p>
+            <p class="about-text">
+                We're a <strong>small team of designers and developers</strong> who believe the best digital products come from understanding people first, then building technology around them.
+            </p>
+        </div>
+        <div class="about-right reveal">
+            <p class="about-description">
+                Every project starts with a conversation. We listen to your goals, study your audience, and craft solutions that feel intuitive — because good design should never need an explanation. From brand identity to full-scale web platforms, we handle the details so you can focus on what you do best.
+            </p>
+            <div class="about-stats">
+                <div>
+                    <div class="stat-number">47</div>
+                    <div class="stat-label">Projects delivered</div>
+                </div>
+                <div>
+                    <div class="stat-number">12</div>
+                    <div class="stat-label">Countries served</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="services" id="services">
+        <div class="section-header">
+            <h2 class="section-title">What we do</h2>
+        </div>
+        <div class="service-grid">
+            <div class="service-card reveal">
+                <div class="service-icon">W</div>
+                <div>
+                    <h3>Web Design</h3>
+                    <p class="service-desc">Responsive websites built with care for detail, performance, and the people who'll use them every day.</p>
+                </div>
+            </div>
+            <div class="service-card reveal">
+                <div class="service-icon">B</div>
+                <div>
+                    <h3>Brand Identity</h3>
+                    <p class="service-desc">Visual systems that capture who you are — from logo and color to voice and typography.</p>
+                </div>
+            </div>
+            <div class="service-card reveal">
+                <div class="service-icon">D</div>
+                <div>
+                    <h3>Development</h3>
+                    <p class="service-desc">Clean, maintainable code. We build frontends that load fast, scale well, and work everywhere.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="work" id="work">
+        <div class="section-header">
+            <h2 class="section-title">Selected work</h2>
+        </div>
+        <div class="work-grid">
+            <div class="work-item reveal">
+                <div class="work-placeholder wp-1">
+                    <span style="position:relative;z-index:1;color:rgba(255,255,255,0.5)">Aura Wellness</span>
+                </div>
+                <div class="work-info">
+                    <div class="work-title">Aura Wellness</div>
+                    <div class="work-category">Website · Brand</div>
+                </div>
+            </div>
+            <div class="work-item reveal">
+                <div class="work-placeholder wp-2">
+                    <span style="position:relative;z-index:1;color:rgba(255,255,255,0.6)">Terraverde</span>
+                </div>
+                <div class="work-info">
+                    <div class="work-title">Terraverde Architecture</div>
+                    <div class="work-category">Website · Development</div>
+                </div>
+            </div>
+        </div>
+        <div class="work-row-2">
+            <div class="work-item reveal">
+                <div class="work-placeholder wp-3">
+                    <span style="position:relative;z-index:1;color:rgba(255,255,255,0.6)">Nomad Coffee</span>
+                </div>
+                <div class="work-info">
+                    <div class="work-title">Nomad Coffee Co.</div>
+                    <div class="work-category">E-commerce · Brand</div>
+                </div>
+            </div>
+            <div class="work-item reveal">
+                <div class="work-placeholder wp-4">
+                    <span style="position:relative;z-index:1;color:rgba(255,255,255,0.4)">Kinetic Labs</span>
+                </div>
+                <div class="work-info">
+                    <div class="work-title">Kinetic Labs</div>
+                    <div class="work-category">Dashboard · UI/UX</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <h2 class="contact-heading reveal">Have a project in mind? <em>Let's talk.</em></h2>
+        <a href="mailto:hello@formastudio.se" class="contact-cta reveal">Start a project</a>
+        <div class="contact-email reveal">
+            Or drop us a line at <a href="mailto:hello@formastudio.se">hello@formastudio.se</a>
+        </div>
+    </section>
+
+    <footer>
+        <span>© 2026 Forma Studio. All rights reserved.</span>
+        <div class="footer-social">
+            <a href="#">Dribbble</a>
+            <a href="#">Behance</a>
+            <a href="#">LinkedIn</a>
+            <a href="#">Instagram</a>
+        </div>
+    </footer>
+
+    <script>
+        const reveals = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.15 });
+
+        reveals.forEach(el => observer.observe(el));
+    </script>
+
+</body>
+</html>
